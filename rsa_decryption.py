@@ -1,3 +1,6 @@
+from email import message
+
+
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
 encrypted_message = [
     14203,
@@ -33,37 +36,37 @@ k = (e,n) such that i,n are key pair
 c is the integer message
 public key = (e,n) = (12847, 19177)
 """
-d = input("Input d: ")
-n = input("Input n: ")
-k = (d, n)
-decrypted_message = []
-text_message = []
+e = 12847
+n = 19177
+k = (e, n)
 
 
 def rsa(k):
-    m = 1
+    decrypted_message = []
     e = int(k[0])
     n = int(k[1])
 
-    for character in encrypted_message:
-        message = character
-        for i in range(0, e):
-            message *= int(character)
+    for character_number in encrypted_message:
+        message = character_number
+        for i in range(1, e):
+            message *= int(character_number)
         decrypted = message % n
         decrypted_message.append(decrypted)
     return decrypted_message
 
 
 def index_of_c(m, alphabet):
-    for text in decrypted_message:
-        temp = ""
-        for index in str(text):
-            temp += alphabet[int(index)]
-        text_message.append(temp)
-    return text_message
+    message = []
+    for text in m:
+        text_character = alphabet[text]
+        message.append(text_character)
+    return message
 
 
-# print(math.pow(14203, 12847))
-# m = int(rsa(d))
-print(rsa(k))
+# print(index_of_c(encrypted_message, alphabet))
+# print(index_of_c(rsa(k), alphabet))
+
+print(len(rsa(k)))
+print(len(encrypted_message))
 print(index_of_c(rsa(k), alphabet))
+
