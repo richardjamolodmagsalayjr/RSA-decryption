@@ -1,5 +1,3 @@
-import math
-
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
 # c is a list of encrypted interger message
 # each item in the list represents single character
@@ -55,7 +53,7 @@ def rsa(k, c):
     return decrypted_message
 
 
-# covert decrypted integer message into text, reverse to c2i, algo 2
+# convert integer message into text, reverse to c2i, algo 3
 def i2c(m, alphabet):
     message = ""
     for i in m:
@@ -64,5 +62,15 @@ def i2c(m, alphabet):
     return message
 
 
+# convert integer message into text, algo 2
+def c2i(c, alphabet):
+    integer_message = []
+    for character in c:
+        i = alphabet.index(character)
+        integer_message.append(i)
+    return integer_message
+
+
 if __name__ == "__main__":
     print(i2c(rsa(k, c), alphabet))
+    print(c2i(i2c(rsa(k, c), alphabet), alphabet))
