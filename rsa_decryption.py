@@ -1,6 +1,3 @@
-from email import message
-import math
-
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
 encrypted_message = [
     14203,
@@ -59,7 +56,7 @@ def rsa(k):
 
 def index_of_c(m, alphabet):
     for text in decrypted_message:
-        temp = ''
+        temp = ""
         for index in str(text):
             temp += alphabet[int(index)]
         text_message.append(temp)
