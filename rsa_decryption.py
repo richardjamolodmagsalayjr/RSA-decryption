@@ -1,6 +1,8 @@
+import math
+
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
 # c is a list of encrypted interger message
-#each item in the list represents single character
+# each item in the list represents single character
 c = [
     14203,
     13300,
@@ -42,8 +44,8 @@ k = (i, n)
 def rsa(k, c):
     decrypted_message = []
 
-    #code from scratch exponentiation function
-    #then get modulo
+    # code from scratch exponentiation function
+    # then get modulo
     for character in c:
         message = character
         for i in range(1, k[0]):
@@ -53,8 +55,8 @@ def rsa(k, c):
     return decrypted_message
 
 
-# covert decrypted integer message into text
-def c2i(m, alphabet):
+# covert decrypted integer message into text, reverse to c2i, algo 2
+def i2c(m, alphabet):
     message = ""
     for i in m:
         c = alphabet[i]
@@ -63,4 +65,4 @@ def c2i(m, alphabet):
 
 
 if __name__ == "__main__":
-    print(c2i(rsa(k, c), alphabet))
+    print(i2c(rsa(k, c), alphabet))
