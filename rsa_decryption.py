@@ -42,6 +42,8 @@ k = (i, n)
 def rsa(k, c):
     decrypted_message = []
 
+    #code from scratch exponentiation function
+    #then get modulo
     for character in c:
         message = character
         for i in range(1, k[0]):
