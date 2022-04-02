@@ -1,7 +1,27 @@
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
 # c is a list of encrypted interger message
 # each item in the list represents single character
-c = [
+#
+c1 = [
+    16669,
+    8825,
+    7907,
+    9622,
+    16100,
+    552,
+    8825,
+    9622,
+    13300,
+    8825,
+    11291,
+    0,
+    8825,
+    15014,
+    0,
+    11291,
+    12294,
+]
+c2 = [
     14203,
     13300,
     11291,
@@ -45,11 +65,7 @@ def rsa(k, c):
     # code from scratch exponentiation function
     # then get modulo
     for character in c:
-        message = character
-        for i in range(1, k[0]):
-            message *= int(character)
-        message = message % k[1]
-        decrypted_message.append(message)
+        decrypted_message.append(character ** k[0] % k[1])
     return decrypted_message
 
 
@@ -72,5 +88,5 @@ def c2i(c, alphabet):
 
 
 if __name__ == "__main__":
-    print(i2c(rsa(k, c), alphabet))
-    print(c2i(i2c(rsa(k, c), alphabet), alphabet))
+    print(i2c(rsa(k, c1), alphabet))
+    print(i2c(rsa(k, c2), alphabet))
