@@ -1,7 +1,7 @@
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
 # c is a list of encrypted interger message
 # each item in the list represents single character
-#
+# c1 and c2 are lists of encrypted message
 c1 = [
     16669,
     8825,
