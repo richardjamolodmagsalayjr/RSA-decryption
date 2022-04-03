@@ -78,7 +78,7 @@ def i2c(m, alphabet):
     return message
 
 
-# convert integer message into text, algo 2
+# convert text into integer message, algo 2, prog_ass 2 task 1, tested
 def c2i(c, alphabet):
     integer_message = []
     for character in c:
