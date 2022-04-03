@@ -51,6 +51,7 @@ c2 = [
     13501,
 ]
 
+text_message = "I love programming!"
 
 # public key = (i,n)
 # k = (i,n) such that i,n are key pair
@@ -87,6 +88,18 @@ def c2i(c, alphabet):
     return integer_message
 
 
+def expmod(base, exp, n):
+    # implement rigth to left binary exponentiation
+    pass
+
+
+def rsa2(k, c):
+    # Implement message encryption
+    pass
+
+
 if __name__ == "__main__":
-    print(i2c(rsa(k, c1), alphabet))
-    print(i2c(rsa(k, c2), alphabet))
+    # print(i2c(rsa(k, c1), alphabet))
+    # print(i2c(rsa(k, c2), alphabet))
+    print(c2i(text_message, alphabet))
+    print(i2c(c2i(text_message, alphabet), alphabet))
