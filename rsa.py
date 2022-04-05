@@ -84,13 +84,23 @@ def c2i(c, alphabet):
     integer_message = []
     for character in c:
         i = alphabet.index(character)
-        integer_message.append(i)
+        integer_message.append(int(i))
     return integer_message
 
 
 def expmod(base, exp, n):
-    # implement rigth to left binary exponentiation
-    pass
+    # implement left to right binary exponentiation
+    if n == 1:
+        return 0
+    res = 1
+    base = base % n
+    while exp > 0:
+        if exp % 2 == 1: 
+            res = (res * base) % n
+        exp = exp >> 1
+        base = (base * base) % n
+        
+    return res
 
 
 def rsa2(k, c):
