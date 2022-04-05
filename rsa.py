@@ -105,7 +105,10 @@ def expmod(base, exp, n):
 
 def rsa2(k, c):
     # Implement message encryption
-    pass
+    encrypted_message = []
+    for character in c:
+        encrypted_message.append(expmod(character, k[0], k[1]))
+    return encrypted_message
 
 
 if __name__ == "__main__":
