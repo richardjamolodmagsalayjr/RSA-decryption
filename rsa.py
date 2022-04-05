@@ -88,16 +88,17 @@ def expmod(base, exp, n):
     res = 1
     base = base % n
     while exp > 0:
-        if exp % 2 == 1: 
+        if exp % 2 == 1:
             res = (res * base) % n
         exp = exp >> 1
         base = (base * base) % n
-        
+
     return res
 
 
 def rsa2(k, c):
-    # Implement message encryption
+    # Implement message encryption, using binary expoentiation
+    # for efficient calculation for large numbers
     encrypted_message = []
     for character in c:
         encrypted_message.append(expmod(character, k[0], k[1]))
@@ -117,5 +118,5 @@ if __name__ == "__main__":
         print(f"Translated message to integer message: {c2i(text_message,alphabet)}")
         print(f"Encrypted integer message: {rsa2(k,c2i(text_message,alphabet))}")
     else:
-        print(f"Decrypted message c1: {i2c(rsa(k,c1), alphabet)}")
-        print(f"Decrypted message c2: {i2c(rsa(k,c2), alphabet)}")
+        print(f"Decrypted message c1: {i2c(rsa2(k,c1), alphabet)}")
+        print(f"Decrypted message c2: {i2c(rsa2(k,c2), alphabet)}")
