@@ -66,7 +66,7 @@ def rsa(k, c):
     # code from scratch exponentiation function
     # then get modulo
     for character in c:
-        decrypted_message.append(character ** k[0] % k[1])
+        decrypted_message.append((character ** k[0]) % k[1])
     return decrypted_message
 
 
