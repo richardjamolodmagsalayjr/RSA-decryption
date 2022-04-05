@@ -51,13 +51,6 @@ c2 = [
     13501,
 ]
 
-text_message = "I love programming!"
-
-# public key = (i,n)
-# k = (i,n) such that i,n are key pair
-i = int(input("Input i: "))
-n = int(input("Input n: "))
-k = (i, n)
 
 # rsa decryption algo
 def rsa(k, c):
@@ -112,7 +105,17 @@ def rsa2(k, c):
 
 
 if __name__ == "__main__":
-    # print(i2c(rsa(k, c1), alphabet))
-    # print(i2c(rsa(k, c2), alphabet))
-    print(c2i(text_message, alphabet))
-    print(i2c(c2i(text_message, alphabet), alphabet))
+    action = int(input("Do 1 -encryption or 0 -decryption: "))
+    # input key for encryption or decrytpion
+    # public key = (i,n)
+    # k = (i,n) such that i,n are key pair
+    i = int(input("Input i: "))
+    n = int(input("Input n: "))
+    k = (i, n)
+    if action == 1:
+        text_message = input("Input text message: ")
+        print(f"Translated message to integer message: {c2i(text_message,alphabet)}")
+        print(f"Encrypted integer message: {rsa2(k,c2i(text_message,alphabet))}")
+    else:
+        print(f"Decrypted message c1: {i2c(rsa(k,c1), alphabet)}")
+        print(f"Decrypted message c2: {i2c(rsa(k,c2), alphabet)}")
