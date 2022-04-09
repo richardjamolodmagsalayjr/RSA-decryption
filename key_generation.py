@@ -20,13 +20,14 @@ def gen_key(p, q):
     while True:
         # will be the value of e if it is coprime n
         # e must be an integer in between 1 < e < phi of n (p)
-        a = random.randint(2, p - 1)
-        if ea_gcd(a, p) == 1:
-            e = a
+        temp = random.randint(2, p - 1)  # randint has inclusive range
+        if ea_gcd(temp, p) == 1:
+            e = temp
             break
 
     d = eea_gcd(e, p)  # first parameter is the larger number
-    print(f"e: {e},phi_n: {p}, n: {n}, d: {d}")
+    # print(f"e: {e},phi_n: {p}, n: {n}, d: {d}")
+    return ((e, n), (d, n))
 
 
 def ea_gcd(a, b):
@@ -79,4 +80,4 @@ def eea_gcd(a, b):
     return x
 
 
-gen_key(2, 17)
+
