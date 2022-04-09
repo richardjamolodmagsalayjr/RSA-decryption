@@ -1,3 +1,7 @@
+from email import message
+import key_generation as kg
+
+
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
 # c is a list of encrypted interger message
 # each item in the list represents single character
@@ -99,24 +103,42 @@ def expmod(base, exp, n):
 def rsa2(k, c):
     # Implement message encryption, using binary expoentiation
     # for efficient calculation for large numbers
+    i = k[0]
+    n = k[1]
     encrypted_message = []
-    for character in c:
-        encrypted_message.append(expmod(character, k[0], k[1]))
+    # c_ in c means each item in the list c, uses c_ to distiguish item and list c
+    for c_ in c:
+        encrypted_message.append(expmod(c_, i, n))
     return encrypted_message
 
 
 if __name__ == "__main__":
-    action = int(input("Do 1 -encryption or 0 -decryption: "))
-    # input key for encryption or decrytpion
-    # public key = (i,n)
-    # k = (i,n) such that i,n are key pair
-    i = int(input("Input i: "))
-    n = int(input("Input n: "))
-    k = (i, n)
-    if action == 1:
-        text_message = input("Input text message: ")
-        print(f"Translated message to integer message: {c2i(text_message,alphabet)}")
-        print(f"Encrypted integer message: {rsa2(k,c2i(text_message,alphabet))}")
-    else:
-        print(f"Decrypted message c1: {i2c(rsa2(k,c1), alphabet)}")
-        print(f"Decrypted message c2: {i2c(rsa2(k,c2), alphabet)}")
+    print("--------------Key Generation--------------")
+    keys = kg.gen_key(83, 13)
+    public_key = keys[0]
+    private_key = keys[1]
+
+    print(f"public_key: {public_key}")
+    print(f"private_key: {private_key}")
+
+    plaintext = input("Plaintext: ")
+
+    encrypted_message = rsa2(public_key, c2i(plaintext, alphabet))
+
+    # use rsa2 for decryption to make computation of large numbers feasible
+    decrypted_message = i2c(rsa2(private_key, encrypted_message), alphabet)
+
+    print(f"Encrypted message: {encrypted_message}")
+    print(f"Decrypted message: {decrypted_message}")
+
+    # n = int(input("Input n: "))
+    # k = (i, n)
+
+    # if action == 1:
+    #     text_message = input("Input text message: ")
+    #     print(f"Translated message to integer message: {c2i(text_message,alphabet)}")
+    #     print(f"Encrypted integer message: {rsa2(k,c2i(text_message,alphabet))}")
+    # else:
+    #     # used the direct method of moduar exponentiation
+    #     print(f"Decrypted message c1: {i2c(rsa(k,c1), alphabet)}")
+    #     print(f"Decrypted message c2: {i2c(rsa(k,c2), alphabet)}")
