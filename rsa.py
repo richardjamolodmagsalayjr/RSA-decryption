@@ -1,5 +1,4 @@
-import key_generation as kg
-
+import random
 
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
 # c is a list of encrypted integer message
@@ -114,13 +113,86 @@ def rsa2(k, c):
     return message
 
 
+"""
+Note: ea_gcd and eea_gcd should return a SINGLE VALUE
+      the greatest common divisor of two number a and b
+"""
+
+
+def gen_key(p, q):
+    """
+    Implement rsa key generation, public and private key
+    ((d,n), (e,n)) is a tuple of keys: private (d,n), public (e,n)
+    """
+    n = p * q  # product of to large prime numbers less than 10,000
+    p = (p - 1) * (q - 1)  # phi or totient of n, refers to the number of coprimes of n
+
+    while True:
+        """
+        e must be an integer in between 1 < e < phi of n (p)
+        Loop breaks if gcd is 1
+        """
+
+        temp = random.randint(2, p - 1)  # randint has inclusive range,
+        if ea_gcd(temp, p) == 1:
+            e = temp
+            break
+
+    # first parameter must be the larger number,d is the multiplicative inverse if e and p
+    # e and p must be co primes
+    d = eea_gcd(e, p)
+
+    return ((d, n), (e, n))
+
+
+def ea_gcd(a, b):
+    """
+    Euclid's algorithm to find e
+    """
+    if a < b:
+        temp = a
+        a = b
+        b = temp
+    if b == 0:
+        return a
+    else:
+        return ea_gcd(b, a % b)
+
+
+def eea_gcd(a, b):
+    """
+    Extended Euclidean algorithm to find d
+    """
+    m = b
+    y = 0
+    x = 1
+
+    if b == 1:
+        return 0
+
+    while a > 1:
+        quotient = a // b
+        t = b
+        b = a % b
+        a = t
+        t = y
+        y = x - quotient * y
+        x = t
+
+    # x must be positive
+    if x < 0:
+        x = x + m
+
+    return x  # multiplicative inverse of e and p
+
+
 if __name__ == "__main__":
     print("--------------------Key Generation---------------------")
-    keys = kg.gen_key(2333, 8951)
-    public_key = keys[0]
-    private_key = keys[1]
+    keys = gen_key(2333, 8951)  # random large prime numbers, returns
+    public_key = keys[1]
+    private_key = keys[0]
     print(f"public_key: {public_key}")
-    print(f"private_key: {private_key}")
+    print(f"private_key: {private_key}\n")
 
     print("---------------Encryption and Decryption---------------")
     plaintext = input("Plaintext: ")
