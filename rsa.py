@@ -196,7 +196,6 @@ if __name__ == "__main__":
 
     print("---------------Encryption and Decryption---------------")
     plaintext = input("Plaintext: ")
-
     encrypted_message = rsa2(public_key, c2i(plaintext, alphabet))
     decrypted_message = i2c(rsa2(private_key, encrypted_message), alphabet)
 
