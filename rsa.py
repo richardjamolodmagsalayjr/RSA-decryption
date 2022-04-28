@@ -1,57 +1,7 @@
+from pydoc import plain
 import random
 
 alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,"
-# c is a list of encrypted integer message
-# each item in the list represents single character
-# c1 and c2 are lists of encrypted message
-c1 = [
-    16669,
-    8825,
-    7907,
-    9622,
-    16100,
-    552,
-    8825,
-    9622,
-    13300,
-    8825,
-    11291,
-    0,
-    8825,
-    15014,
-    0,
-    11291,
-    12294,
-]
-c2 = [
-    14203,
-    13300,
-    11291,
-    18556,
-    17918,
-    0,
-    2178,
-    552,
-    12294,
-    8825,
-    176,
-    13300,
-    2704,
-    8825,
-    2178,
-    13300,
-    8825,
-    1,
-    3558,
-    8825,
-    15014,
-    13300,
-    3449,
-    8825,
-    9502,
-    13300,
-    13501,
-]
 
 
 def rsa(k, c):
@@ -132,7 +82,6 @@ def gen_key(p, q):
         e must be an integer in between 1 < e < phi of n (p)
         Loop breaks if gcd is 1
         """
-
         temp = random.randint(2, p - 1)  # randint has inclusive range,
         if ea_gcd(temp, p) == 1:
             e = temp
@@ -187,17 +136,24 @@ def eea_gcd(a, b):
 
 
 if __name__ == "__main__":
-    print("--------------------Key Generation---------------------")
-    keys = gen_key(2333, 8951)  # random large prime numbers, returns
-    public_key = keys[1]
-    private_key = keys[0]
-    print(f"public_key: {public_key}")
-    print(f"private_key: {private_key}\n")
+    print("--------------------Programming Assignment 4---------------------")
+   
+    public_key = (2031,8383)
+    private_key = (5071,8383)
+   
+    # task 3, programming assignment 4
+    print("Task 3:")
+    k = (12847,19177) #public key of 2022-0000
+    c = [16669, 8825, 7907, 9622, 16100, 552, 8825, 9622, 13300, 8825, 11291, 0, 8825, 15014, 0, 11291, 12294]
+    m = rsa2(k,c)
+    print(i2c(m,alphabet))
 
-    print("---------------Encryption and Decryption---------------")
-    plaintext = input("Plaintext: ")
-    encrypted_message = rsa2(public_key, c2i(plaintext, alphabet))
-    decrypted_message = i2c(rsa2(private_key, encrypted_message), alphabet)
+    print()
 
-    print(f"Encrypted message: {encrypted_message}")
-    print(f"Decrypted message: {decrypted_message}")
+    # task 4, programming assignment 4, encrypted message, integer message
+    print("Task 4:")
+    plaintext= "Well done classmates!"
+    k = private_key # my private key
+    c = c2i(plaintext, alphabet) #convert plaintext to integers
+    encrypted_integer_message= rsa2(k,c) 
+    print(f"Broadcast Message: {encrypted_integer_message}")
